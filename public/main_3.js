@@ -36,15 +36,21 @@ const createScene = function () {
     const points = [
 
         new BABYLON.Vector3(0, 0, 0),
+        new BABYLON.Vector3(l1 - (l1 - (l_21+l_22+(Math.sqrt(2) * d) / 4))/2, 0, 0),
         new BABYLON.Vector3(l1, 0, 0),
         new BABYLON.Vector3(l1 + l2, 0, 0),
         new BABYLON.Vector3(l1 + l2, s_h * D2 / 2, s_w * D2 / 2),
         new BABYLON.Vector3(l1 + l2, s_h * D2 / 2, -s_w * D2 / 2),
         new BABYLON.Vector3(l1, s_h * D2 / 2, -s_w * D2 / 2),
         new BABYLON.Vector3(l1, s_h * D2 / 2, s_w * D2 / 2),
+
+        new BABYLON.Vector3(l_21+l_22/2, s_h * (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2), -s_w * (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2)),
+        new BABYLON.Vector3(l_21+l_22/2, s_h * (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2), s_w * (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2)),
+
         new BABYLON.Vector3(0, s_h * D1 / 2, -s_w * D1 / 2),
         new BABYLON.Vector3(0, s_h * D1 / 2, s_w * D1 / 2),
 
+        
 
         new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4) * s_h, (h1 + h2 - (Math.sqrt(2) * d) / 4) * s_w),
         new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4) * s_h, -(h1 + h2 - (Math.sqrt(2) * d) / 4) * s_w),
@@ -85,7 +91,7 @@ const createScene = function () {
     });
 
     var linePoints = [];
-    for (var i = 0; i <= 8; i++) {
+    for (var i = 0; i <= 11; i++) {
         linePoints.push(points[i]);
     }
     var line = BABYLON.MeshBuilder.CreateLines("line", { points: linePoints }, scene);
@@ -214,18 +220,20 @@ const createScene = function () {
     (
 
         // cylinder blocks
-        hex (1 12 14 13 15 24 20 25 21) (30 1 30) simpleGrading (1 1 1)//bottom_1
-        hex (1 20 21 22 23 2) (30 1 30) simpleGrading (1 1 1)//bottom_2
+        hex (0 12 14 13 15 20 21) (30 1 30) simpleGrading (1 1 1)//bottom_1
+        hex (0 20 21 22 23 1) (30 1 30) simpleGrading (1 1 1)//bottom_2
+        hex (26 27 22 23 1 2) (30 1 30) simpleGrading (1 1 1)//bottom_3
 
-        hex (1 9 8 16 12 17 13) (30 1 30) simpleGrading (1 1 1)//left
+        hex (10 11 0 12 13 16 17) (30 1 30) simpleGrading (1 1 1)//left
 
-        hex (9 8 16 17 18 19 6 7) (30 1 30) simpleGrading (1 1 1)//top_1
-        hex (18 19 6 7 26 27 24 25 14 15) (30 1 30) simpleGrading (1 1 1)//top_2
+        hex (10 11 9 8 16 17 18 19) (30 1 30) simpleGrading (1 1 1)//top_1
+        hex (18 19 9 8 24 25 26 27) (30 1 30) simpleGrading (1 1 1)//top_2
+        hex (9 8 26 27 2 7 6) (30 1 30) simpleGrading (1 1 1)//top_3
 
-        hex (6 7 26 27 22 23 2) (30 1 30) simpleGrading (1 1 1)//right
+        hex (26 27 2 7 6) (30 1 30) simpleGrading (1 1 1)//right
 
         // right block
-        hex (6 7 2 4 5 3) (200 1 30) simpleGrading (1 1 1)
+        hex (7 6 2 3 4 5) (200 1 30) simpleGrading (1 1 1)
     );
     edges
     (
@@ -254,7 +262,7 @@ const createScene = function () {
             type patch;
             faces
             (
-                (0 3 7 4)
+                (0 11 10)
             );
         }
         outlet
@@ -262,7 +270,7 @@ const createScene = function () {
             type patch;
             faces
             (
-                (9 13 14 10)
+                (3 4 5)
             );
         }
         wall
@@ -270,12 +278,9 @@ const createScene = function () {
             type wall;
             faces
             (
-                (3 2 6 7)
-                (2 11 15 6)
-                (11 10 14 15)
-                (0 1 5 4)
-                (1 8 12 5)
-                (8 9 13 12)
+                (11 10 9 8)
+                (9 8 7 6)
+                (7 6 4 5)
      
             );
         }
@@ -284,10 +289,15 @@ const createScene = function () {
             type wall;
             faces
             (
-                (16 17 21 20)
-                (17 18 22 21)
-                (19 18 22 23)
-                (16 19 23 20)
+                (12 13 14 15)
+                (14 15 18 19)
+                (16 17 18 19)
+                (16 17 12 13)
+
+                (24 25 20 21)
+                (20 22 23 21)
+                (22 23 26 27)
+                (24 25 26 27)
             );
         }
         frontAndBack
@@ -295,18 +305,22 @@ const createScene = function () {
             type empty;
             faces
             (
-                (0 1 2 3)
-                (1 16 19 2)
-                (19 18 11 2)
-                (17 8 11 18)
-                (1 8 17 16)
-                (8 9 10 11)
-                (4 7 6 5)
-                (5 6 23 20)
-                (23 6 15 22)
-                (21 22 15 12)
-                (5 20 21 12)
-                (12 15 14 13)
+                (10 17 13 0)
+                (0 11 16 17)
+                (11 16 18 9)
+                (10 17 19 8)
+                (8 19 25 27)
+                (9 18 24 26)
+                (8 27 2 6)
+                (9 26 2 7)
+                (27 23 1 2)
+                (26 22 1 2)
+                (0 13 15 21)
+                (0 12 14 20)
+                (0 21 23 1)
+                (0 20 22 1)
+                (2 6 5 3)
+                (7 2 4 3)
             );
         }
     );`;
