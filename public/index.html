@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Babylon Template</title>
+    <link rel="stylesheet" href="./stile.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="./babylon.js"></script>
+    <script src="./babylon.gui.min.js"></script>
+</head>
+
+<body>
+    <div class="Levt">
+        <form id='form'>
+
+
+            <fieldset>
+                <legend>Переменные</legend>
+                <div class="div_1">
+                    <div>
+                        <p>D1</p>
+                        <label><input value="30" id="D1"></label>
+                    </div>
+
+                    <div>
+                        <p>D2</p>
+                        <label><input value="10" id="D2"></label>
+                    </div>
+
+                    <div>
+                        <p>l1</p>
+                        <label><input value="50" id="l1"></label>
+                    </div>
+
+                    <div>
+                        <p>l2</p>
+                        <label><input value="20" id="l2"></label>
+                    </div>
+
+                    <div>
+                        <p>d</p>
+                        <label><input value="4" id="d"></label>
+                    </div>
+
+                    <div>
+                        <p>h1</p>
+                        <label><input value="5" id="h1"></label>
+                    </div>
+
+                    <div>
+                        <p>h2</p>
+                        <label><input value="5" id="h2"></label>
+                    </div>
+
+                    <div>
+                        <p>l_21</p>
+                        <label><input value="10" id="l_21"></label>
+                    </div>
+
+                    <div>
+                        <p>l_22</p>
+                        <label><input value="10" id="l_22"></label>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit">отправить</button>
+            </fieldset>
+
+
+        </form>
+
+        <canvas id="canvas"></canvas>
+
+
+    </div>
+    <h1 id="Good"></h1>
+
+    <script src="./main_3.js"></script>
+</body>
+
+</html>
