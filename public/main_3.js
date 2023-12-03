@@ -5,8 +5,7 @@ let scene;
 
 let W = 0.25;
 
-let pointStrings = `(${0} ${0} ${0}) //${0}\n`;;
-let count = 0;
+let pointStrings = `(${0} ${0} ${0.25}) //${0}\n`;;
 
 const createScene = function () {
 
@@ -20,6 +19,9 @@ const createScene = function () {
     h2 = parseFloat(form.elements.h2.value);
     l_21 = parseFloat(form.elements.l_21.value);
     l_22 = parseFloat(form.elements.l_22.value);
+
+    let count = 0;
+
 
     // Создание сцены
     const newScene = new BABYLON.Scene(engine);
@@ -38,19 +40,26 @@ const createScene = function () {
         new BABYLON.Vector3(0, 0, -W ),
         new BABYLON.Vector3(l_21+l_22/2, 0, W),
         new BABYLON.Vector3(l_21+l_22/2, 0, -W),
+        
+        new BABYLON.Vector3((l_21+l_22)+l_22/2, 0, W),
+        new BABYLON.Vector3((l_21+l_22)+l_22/2, 0, -W),
+
         new BABYLON.Vector3(l1, 0, W),
         new BABYLON.Vector3(l1, 0, -W),
         new BABYLON.Vector3(l1 + l2, 0, W),
         new BABYLON.Vector3(l1 + l2, 0, -W),
-
 
         new BABYLON.Vector3(l1 + l2,  D2 / 2, W),
         new BABYLON.Vector3(l1 + l2,  D2 / 2, -W),
         new BABYLON.Vector3(l1,  D2 / 2, -W),
         new BABYLON.Vector3(l1,  D2 / 2, W),
 
+        new BABYLON.Vector3((l_21+l_22)+l_22/2, ((((l_21+l_22)+l_22/2)*((D2-D1)/2)/l1)+D1/2), -W),
+        new BABYLON.Vector3((l_21+l_22)+l_22/2, ((((l_21+l_22)+l_22/2)*((D2-D1)/2)/l1)+D1/2), W),
+
         new BABYLON.Vector3(l_21+l_22/2, (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2), -W),
         new BABYLON.Vector3(l_21+l_22/2, (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2), W),
+
 
         new BABYLON.Vector3(0,  D1 / 2, -W),
         new BABYLON.Vector3(0, D1 / 2, W),
@@ -96,7 +105,7 @@ const createScene = function () {
     });
 
     var linePoints = [];
-    for (var i = 0; i <= 15; i++) {
+    for (var i = 0; i <= 19; i++) {
         linePoints.push(points[i]);
     }
     var line = BABYLON.MeshBuilder.CreateLines("line", { points: linePoints }, scene);
@@ -223,41 +232,43 @@ const createScene = function () {
     
     blocks
     (
-
         // cylinder blocks
-        hex (0 1 17 16 24 25 3 2) (30 1 30) simpleGrading (1 1 1)//bottom_1
-        hex (2 4 5 3 25 27 26 24) (30 1 30) simpleGrading (1 1 1)//bottom_2
+        hex (0 2 3 1 20 22 23 21) (30 1 30) simpleGrading (1 1 1)//bottom_1
+        hex (2 4 5 3 28 30 31 29) (30 1 30) simpleGrading (1 1 1)//bottom_2
+        
+        hex (0 20 21 1 19 24 25 18) (30 1 30) simpleGrading (1 1 1)//left
+        
+        hex (22 2 3 23 26 17 16 27) (30 1 30) simpleGrading (1 1 1)//center_1
+        hex (2 28 29 3 17 32 33 16) (30 1 30) simpleGrading (1 1 1)//center_2
+        hex (30 4 5 31 34 15 14 35) (30 1 30) simpleGrading (1 1 1)//center_3
 
-        hex (0 1 17 16 20 21 14 15) (30 1 30) simpleGrading (1 1 1)//left
-
-        hex (19 18 28 29 12 13 22 23) (30 1 30) simpleGrading (1 1 1)//top_1
-        hex (14 15 20 21 23 22 13 12) (30 1 30) simpleGrading (1 1 1)//top_2
-        hex (28 29 30 31 10 11 13 12) (30 1 30) simpleGrading (1 1 1)//top_3
-
-        hex (27 26 30 31 10 11 4 5) (30 1 30) simpleGrading (1 1 1)//right
-
+        hex (24 26 27 25 19 17 16 18) (30 1 30) simpleGrading (1 1 1)//top_1
+        hex (32 34 35 33 17 15 14 16) (30 1 30) simpleGrading (1 1 1)//top_2
+        
+        hex (4 6 7 5 15 13 12 14) (100 1 30) simpleGrading (1 1 1)//right
+        
         // right block
-        hex (11 10 5 4 6 7 8 9) (200 1 30) simpleGrading (1 1 1)
+        hex (6 8 9 7 13 10 11 12) (90 1 30) simpleGrading (1 1 1)
     );
     edges
     (
-        arc 17 19 (${tube[0].x} ${tube[0].y} ${tube[0].z})
-        arc 16 18 (${tube[1].x} ${tube[1].y} ${tube[1].z})
-        arc 25 27 (${tube[2].x} ${tube[2].y} ${tube[2].z})
-        arc 24 26 (${tube[3].x} ${tube[3].y} ${tube[3].z})
+        arc 21 23 (${tube[0].x} ${tube[0].y} ${tube[0].z})
+        arc 20 22 (${tube[1].x} ${tube[1].y} ${tube[1].z})
+        arc 29 31 (${tube[2].x} ${tube[2].y} ${tube[2].z})
+        arc 28 30 (${tube[3].x} ${tube[3].y} ${tube[3].z})
 
-        arc 21 23 (${tube[4].x} ${tube[4].y} ${tube[4].z})
-        arc 20 22 (${tube[5].x} ${tube[5].y} ${tube[5].z})
-        arc 29 31 (${tube[6].x} ${tube[6].y} ${tube[6].z})
-        arc 28 30 (${tube[7].x} ${tube[7].y} ${tube[7].z})
-        arc 17 21 (${tube[8].x} ${tube[8].y} ${tube[8].z})
-        arc 16 20 (${tube[9].x} ${tube[9].y} ${tube[9].z})
-        arc 25 29 (${tube[10].x} ${tube[10].y} ${tube[10].z})
-        arc 24 28 (${tube[11].x} ${tube[11].y} ${tube[11].z})
-        arc 19 23 (${tube[12].x} ${tube[12].y} ${tube[12].z})
-        arc 18 22 (${tube[13].x} ${tube[13].y} ${tube[13].z})
-        arc 27 31 (${tube[14].x} ${tube[14].y} ${tube[14].z})
-        arc 26 30 (${tube[15].x} ${tube[15].y} ${tube[15].z})
+        arc 25 27 (${tube[4].x} ${tube[4].y} ${tube[4].z})
+        arc 24 26 (${tube[5].x} ${tube[5].y} ${tube[5].z})
+        arc 33 35 (${tube[6].x} ${tube[6].y} ${tube[6].z})
+        arc 32 34 (${tube[7].x} ${tube[7].y} ${tube[7].z})
+        arc 21 25 (${tube[8].x} ${tube[8].y} ${tube[8].z})
+        arc 20 24 (${tube[9].x} ${tube[9].y} ${tube[9].z})
+        arc 29 33 (${tube[10].x} ${tube[10].y} ${tube[10].z})
+        arc 28 32 (${tube[11].x} ${tube[11].y} ${tube[11].z})
+        arc 23 27 (${tube[12].x} ${tube[12].y} ${tube[12].z})
+        arc 22 26 (${tube[13].x} ${tube[13].y} ${tube[13].z})
+        arc 31 35 (${tube[14].x} ${tube[14].y} ${tube[14].z})
+        arc 30 34 (${tube[15].x} ${tube[15].y} ${tube[15].z})
     );
     boundary
     (
@@ -266,7 +277,7 @@ const createScene = function () {
             type patch;
             faces
             (
-                (0 1 15 14)
+                (0 19 18 1)
             );
         }
         outlet
@@ -274,7 +285,7 @@ const createScene = function () {
             type patch;
             faces
             (
-                (6 7 9 8)
+                (8 10 11 9)
             );
         }
         wall
@@ -282,55 +293,70 @@ const createScene = function () {
             type wall;
             faces
             (
-                (14 15 13 12)
-                (12 13 11 10)
-                (10 11 8 9)
-                (6 7 5 4)
-                (5 4 3 2)
-                (3 2 1 0)
-     
+                (19 17 16 18)
+                (17 15 14 16)
+                (15 13 12 14)
+                (13 10 11 12)
+
+                (0 2 3 1)
+                (2 4 5 3)
+                (4 6 7 5)
+                (6 8 9 7)
             );
         }
-        cylinder
+        cylinder_1
         {
             type wall;
             faces
             (
-                (16 17 19 18)
-                (18 19 23 22)
-                (22 23 21 20)
-                (20 21 17 16)
+                (20 22 23 21)
+                (22 26 27 23)
+                (24 26 27 25)
+                (20 24 25 21)
 
-                (29 28 24 25)
-                (25 24 26 27)
-                (27 26 30 31)
-                (29 28 30 31)
+
             );
+            
+        }
+        cylinder_2
+        {
+            type wall;
+            faces
+            (
+                (28 30 31 29)
+                (30 34 35 31)
+                (32 34 35 33)
+                (28 32 33 29)
+            );
+            
         }
         frontAndBack
         {
             type empty;
             faces
             (
-                (1 3 25 17)
-                (0 2 24 16)
-                (17 19 25 29)
-                (16 18 24 28)
-                (19 29 12 23)
-                (18 28 13 22)
-                (0 16 20 15)
-                (1 14 21 17)
-                (14 21 23 12)
-                (15 20 22 13)
-                (12 29 31 10)
-                (13 28 30 11)
-                (11 30 26 4)
-                (10 31 27 5)
-                (3 25 27 5)
-                (2 24 26 4)
-                (10 5 7 9)
-                (11 4 6 8)
-                
+            		(1 3 23 21)
+                (23 3 16 27)
+                (3 29 33 16)
+                (3 5 31 29)
+                (31 5 14 35)
+                (5 7 12 14)
+                (7 9 11 12)
+                (33 35 16 14)
+                (25 27 16 18)
+                (1 21 25 18)
+
+
+                (0 2 22 20)
+                (22 2 17 26)
+                (2 28 32 17)
+                (2 4 30 28)
+                (30 4 15 34)
+                (4 6 13 15)
+                (6 8 10 13)
+                (32 34 15 17)
+                (24 26 17 19)
+                (0 20 24 19)
             );
         }
     );`;
