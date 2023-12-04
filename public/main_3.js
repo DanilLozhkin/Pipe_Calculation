@@ -37,60 +37,60 @@ const createScene = function () {
     const points = [
 
         new BABYLON.Vector3(0, 0, W),
-        new BABYLON.Vector3(0, 0, -W ),
-        new BABYLON.Vector3(l_21+l_22/2, 0, W),
-        new BABYLON.Vector3(l_21+l_22/2, 0, -W),
-        
-        new BABYLON.Vector3((l_21+l_22)+l_22/2, 0, W),
-        new BABYLON.Vector3((l_21+l_22)+l_22/2, 0, -W),
+        new BABYLON.Vector3(0, 0, -W),
+        new BABYLON.Vector3(l_21 + l_22 / 2, 0, W),
+        new BABYLON.Vector3(l_21 + l_22 / 2, 0, -W),
+
+        new BABYLON.Vector3((l_21 + l_22) + l_22 / 2, 0, W),
+        new BABYLON.Vector3((l_21 + l_22) + l_22 / 2, 0, -W),
 
         new BABYLON.Vector3(l1, 0, W),
         new BABYLON.Vector3(l1, 0, -W),
         new BABYLON.Vector3(l1 + l2, 0, W),
         new BABYLON.Vector3(l1 + l2, 0, -W),
 
-        new BABYLON.Vector3(l1 + l2,  D2 / 2, W),
-        new BABYLON.Vector3(l1 + l2,  D2 / 2, -W),
-        new BABYLON.Vector3(l1,  D2 / 2, -W),
-        new BABYLON.Vector3(l1,  D2 / 2, W),
+        new BABYLON.Vector3(l1 + l2, D2 / 2, W),
+        new BABYLON.Vector3(l1 + l2, D2 / 2, -W),
+        new BABYLON.Vector3(l1, D2 / 2, -W),
+        new BABYLON.Vector3(l1, D2 / 2, W),
 
-        new BABYLON.Vector3((l_21+l_22)+l_22/2, ((((l_21+l_22)+l_22/2)*((D2-D1)/2)/l1)+D1/2), -W),
-        new BABYLON.Vector3((l_21+l_22)+l_22/2, ((((l_21+l_22)+l_22/2)*((D2-D1)/2)/l1)+D1/2), W),
+        new BABYLON.Vector3((l_21 + l_22) + l_22 / 2, ((((l_21 + l_22) + l_22 / 2) * ((D2 - D1) / 2) / l1) + D1 / 2), -W),
+        new BABYLON.Vector3((l_21 + l_22) + l_22 / 2, ((((l_21 + l_22) + l_22 / 2) * ((D2 - D1) / 2) / l1) + D1 / 2), W),
 
-        new BABYLON.Vector3(l_21+l_22/2, (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2), -W),
-        new BABYLON.Vector3(l_21+l_22/2, (((l_21+l_22/2)*((D2-D1)/2)/l1)+D1/2), W),
+        new BABYLON.Vector3(l_21 + l_22 / 2, (((l_21 + l_22 / 2) * ((D2 - D1) / 2) / l1) + D1 / 2), -W),
+        new BABYLON.Vector3(l_21 + l_22 / 2, (((l_21 + l_22 / 2) * ((D2 - D1) / 2) / l1) + D1 / 2), W),
 
 
-        new BABYLON.Vector3(0,  D1 / 2, -W),
+        new BABYLON.Vector3(0, D1 / 2, -W),
         new BABYLON.Vector3(0, D1 / 2, W),
 
-        
 
-        new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4) , W),
-        new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4) , -W),
+
+        new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4), W),
+        new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4), -W),
 
         new BABYLON.Vector3(l_21 + (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4), W),
         new BABYLON.Vector3(l_21 + (Math.sqrt(2) * d) / 4, (h1 + h2 - (Math.sqrt(2) * d) / 4), -W),
 
-        new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4),W),
+        new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4), W),
         new BABYLON.Vector3(l_21 - (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4), -W),
 
-        new BABYLON.Vector3(l_21 + (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4)  , W),
-        new BABYLON.Vector3(l_21 + (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4) , -W),
+        new BABYLON.Vector3(l_21 + (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4), W),
+        new BABYLON.Vector3(l_21 + (Math.sqrt(2) * d) / 4, (h1 + h2 + (Math.sqrt(2) * d) / 4), -W),
 
 
 
-        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4)  , W),
-        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4)  , -W),
+        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4), W),
+        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4), -W),
 
-        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4)  ,W),
-        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4)  , -W),
+        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4), W),
+        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 - (Math.sqrt(2) * d) / 4), -W),
 
-        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4)  , W),
-        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4)  , -W),
+        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4), W),
+        new BABYLON.Vector3(l_21 + l_22 - (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4), -W),
 
-        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4) , W),
-        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4) , -W),
+        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4), W),
+        new BABYLON.Vector3(l_21 + l_22 + (Math.sqrt(2) * d) / 4, (h1 + (Math.sqrt(2) * d) / 4), -W),
     ];
 
     // Создание красных сфер для точек
@@ -129,34 +129,34 @@ const createScene = function () {
         }
         count += 1;
     });
-        
-    const tube =
-    [
-        new BABYLON.Vector3(l_21, (h1 + h2 - d/2) , -W),    // 0
-        new BABYLON.Vector3(l_21, (h1 + h2 - d/2) , W),     // 1
-        
-        new BABYLON.Vector3(l_21 + l_22, (h1 - d/2) , -W),           // 2
-        new BABYLON.Vector3(l_21 + l_22, (h1 - d/2) , W),            // 3
-        
-        new BABYLON.Vector3(l_21, (h1 + h2 + d/2) , -W),    // 4
-        new BABYLON.Vector3(l_21, (h1 + h2 + d/2) , W),     // 5
-        
-        new BABYLON.Vector3(l_21 + l_22, (h1 + d/2)  , -W),           // 6
-        new BABYLON.Vector3(l_21 + l_22, (h1 + d/2)  , W),            // 7
-        
-        new BABYLON.Vector3(l_21 - d/2, (h1 + h2)  , -W),           // 8
-        new BABYLON.Vector3(l_21 - d/2, (h1 + h2) , W),            // 9
-        
-        new BABYLON.Vector3(l_21 + l_22 - d/2, h1 , -W),                     // 10
-        new BABYLON.Vector3(l_21 + l_22 - d/2, h1 , W),                      // 11
-        
-        new BABYLON.Vector3(l_21 + d/2, (h1 + h2) , -W),           // 12
-        new BABYLON.Vector3(l_21 + d/2, (h1 + h2)  , W),            // 13
-        
-        new BABYLON.Vector3(l_21 + l_22 + d/2, h1 , -W),                     // 14
-        new BABYLON.Vector3(l_21 + l_22 + d/2, h1 , W)                       // 15
 
-    ]
+    const tube =
+        [
+            new BABYLON.Vector3(l_21, (h1 + h2 - d / 2), -W),    // 0
+            new BABYLON.Vector3(l_21, (h1 + h2 - d / 2), W),     // 1
+
+            new BABYLON.Vector3(l_21 + l_22, (h1 - d / 2), -W),           // 2
+            new BABYLON.Vector3(l_21 + l_22, (h1 - d / 2), W),            // 3
+
+            new BABYLON.Vector3(l_21, (h1 + h2 + d / 2), -W),    // 4
+            new BABYLON.Vector3(l_21, (h1 + h2 + d / 2), W),     // 5
+
+            new BABYLON.Vector3(l_21 + l_22, (h1 + d / 2), -W),           // 6
+            new BABYLON.Vector3(l_21 + l_22, (h1 + d / 2), W),            // 7
+
+            new BABYLON.Vector3(l_21 - d / 2, (h1 + h2), -W),           // 8
+            new BABYLON.Vector3(l_21 - d / 2, (h1 + h2), W),            // 9
+
+            new BABYLON.Vector3(l_21 + l_22 - d / 2, h1, -W),                     // 10
+            new BABYLON.Vector3(l_21 + l_22 - d / 2, h1, W),                      // 11
+
+            new BABYLON.Vector3(l_21 + d / 2, (h1 + h2), -W),           // 12
+            new BABYLON.Vector3(l_21 + d / 2, (h1 + h2), W),            // 13
+
+            new BABYLON.Vector3(l_21 + l_22 + d / 2, h1, -W),                     // 14
+            new BABYLON.Vector3(l_21 + l_22 + d / 2, h1, W)                       // 15
+
+        ]
 
     const redMaterial_2 = new BABYLON.StandardMaterial("redMaterial_2", scene);
     redMaterial_2.emissiveColor = new BABYLON.Color3(1, 1, 0);
@@ -363,14 +363,19 @@ const createScene = function () {
 
     let Good = document.getElementById('Good');
     let exportLines = EXPORT.split('\n');
-    Good.innerHTML = exportLines.map(line => line.trim()).join('<br>');
-
+    Good.value = exportLines.map(line => line.trim()).join('\n');
+    autoExpand(Good); // Вызываем функцию автоматического расширения при загрузке страницы
 
     // Запускаем рендеринг сцены
     engine.runRenderLoop(function () {
-        scene.render();
+        scene.render(); 
     });
 };
+
+function autoExpand(element) {
+    element.style.height = 'auto';
+    element.style.height = (element.scrollHeight) + 'px';
+}
 
 window.addEventListener("resize", function () {
     engine.resize();
