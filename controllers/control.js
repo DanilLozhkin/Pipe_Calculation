@@ -17,13 +17,13 @@ router.post('/add', (req, res) => {
     console.log('Получено значение 2 из формы:', U);
 
     // Сохраняем файл blockMeshDict
-    fs.writeFile(__dirname + "/../KURSACH_2/system/blockMeshDict_2", blockMeshDict, (err) => {
+    fs.writeFile(__dirname + "/../KURSACH_2/system/blockMeshDict", blockMeshDict, (err) => {
         if (err) throw err;
         console.log('Значение 1 успешно сохранено в файле');
     });
 
     // Сохраняем файл U
-    fs.writeFile(__dirname + "/../KURSACH_2/0/U_2", U, (err) => {
+    fs.writeFile(__dirname + "/../KURSACH_2/0/U", U, (err) => {
         if (err) throw err;
         console.log('Значение 2 успешно сохранено в файле');
     });
