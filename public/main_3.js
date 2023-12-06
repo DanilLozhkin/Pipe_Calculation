@@ -20,6 +20,8 @@ const createScene = function () {
     l_21 = parseFloat(form.elements.l_21.value);
     l_22 = parseFloat(form.elements.l_22.value);
 
+    Speed = parseFloat(form.elements.Speed.value);
+
     let count = 0;
 
 
@@ -184,37 +186,14 @@ const createScene = function () {
         count += 1;
     });
 
-    //var points_1 = new BABYLON.Vector3(l_21, (h1 + h2 - d/2)  * , -((h1 + h2- d/2) * s_w));
-
-
-
-    // points.forEach(point => {
-    //     const textMesh = BABYLON.MeshBuilder.CreatePlane(`text-${point.x}, ${point.y}, ${point.z}`, { size: 6 }, scene);
-    //     textMesh.position = new BABYLON.Vector3(point.x, point.y + 0.3, point.z);
-
-    //     const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(textMesh);
-    //     const textBlock = new BABYLON.GUI.TextBlock();
-    //     //textBlock.text = `${point.x} ${point.y} ${point.z}`;
-    //     textBlock.text = `${count}`;
-    //     textBlock.color = "white";
-    //     textBlock.fontSize = 30;
-    //     textBlock.rotation = - Math.PI / 5;
-    //     advancedTexture.addControl(textBlock);
-
-    //     if (count > 0) {
-    //         pointStrings += `(${point.x} ${point.y} ${point.z}) //${count}\n`;
-    //     }
-    //     count += 1;
-    // });
-
     let EXPORT = `
-    /*--------------------------------*- C++ -*----------------------------------*\
+    /*--------------------------------*- C++ -*----------------------------------*\\
       =========                 |
-      \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
-       \\    /   O peration     | Website:  https://openfoam.org
-        \\  /    A nd           | Version:  11
-         \\/     M anipulation  |
-    \*---------------------------------------------------------------------------*/
+      \\\\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+       \\\\    /   O peration     | Website:  https://openfoam.org
+        \\\\  /    A nd           | Version:  11
+         \\\\/     M anipulation  |
+    \\*---------------------------------------------------------------------------*/
     FoamFile
     {
         format      ascii;
@@ -335,7 +314,7 @@ const createScene = function () {
             type empty;
             faces
             (
-            		(1 3 23 21)
+            	(1 3 23 21)
                 (23 3 16 27)
                 (3 29 33 16)
                 (3 5 31 29)
@@ -361,10 +340,75 @@ const createScene = function () {
         }
     );`;
 
-    let Good = document.getElementById('Good');
-    let exportLines = EXPORT.split('\n');
-    Good.value = exportLines.map(line => line.trim()).join('\n');
-    autoExpand(Good); // Вызываем функцию автоматического расширения при загрузке страницы
+    let blockMeshDict = document.getElementById('blockMeshDict');
+    let blockMeshDictLines = EXPORT.split('\n');
+    blockMeshDict.value = blockMeshDictLines.map(line => line.trim()).join('\n');
+    autoExpand(blockMeshDict); // Вызываем функцию автоматического расширения при загрузке страницы
+
+
+    let EXPORT_2 = `
+    /*--------------------------------*- C++ -*----------------------------------*\\
+  =========                 |
+  \\\\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\\\    /   O peration     | Website:  https://openfoam.org
+    \\\\  /    A nd           | Version:  11
+     \\\\/     M anipulation  |
+\\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (${Speed} 0 0);
+    }
+    outlet
+    {
+        type            zeroGradient;
+
+    }
+    wall
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    cylinder_1
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    cylinder_2
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //
+
+    `
+    let U = document.getElementById('U');
+    let ULines = EXPORT_2.split('\n');
+    U.value = ULines.map(line => line.trim()).join('\n');
+
+    autoExpand(U); // Вызываем функцию автоматического расширения при загрузке страницы
 
     // Запускаем рендеринг сцены
     engine.runRenderLoop(function () {

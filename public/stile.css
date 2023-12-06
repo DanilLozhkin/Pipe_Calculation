@@ -47,3 +47,9 @@ textarea {
     resize: none; /* Отключаем возможность изменения размера вручную */
     overflow-y: hidden; /* Скрываем вертикальный скроллбар */
 }
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}

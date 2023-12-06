@@ -25,6 +25,7 @@
 </head>
 
 <body>
+    <img src="./17.png" alt="Ваш текст описания">
     <div class="Levt">
         <form id='form'>
 
@@ -76,6 +77,12 @@
                         <p>l_22</p>
                         <label><input value="10" id="l_22"></label>
                     </div>
+
+                    <div>
+                        <p>Скорость м/с</p>
+                        <label><input value="0.0041246" id="Speed"></label>
+                    </div>
+
                 </div>
 
                 <button type="submit" id="submit">отправить</button>
@@ -92,7 +99,11 @@
 
     <form action="/add" method="post">
         <div>
-            <textarea type="text" id="Good" readonly required></textarea>
+            <textarea type="text" id="blockMeshDict"  name="blockMeshDict" readonly required></textarea>
+        </div>
+      
+        <div>
+            <textarea type="text" id="U"  name="U" readonly required></textarea>
         </div>
 
         <button type="submit" id="submit">отправить</button>
