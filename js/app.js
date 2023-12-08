@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 
 
+const https = require('https');
+const fs = require('fs');
 const app = express();
 const router = require('../controllers/control');
 
@@ -23,11 +25,20 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 
-const hostname = '127.0.0.1';
-const PORT = 3000;
+const hostname = '192.168.1.64';
+const PORT = 8000;
 
 
-app.listen(PORT, hostname, () => {
-    console.log("OK server");
-    
+https
+    .createServer(
+    {
+        key: fs.readFileSync('./cert/private.key'),
+        cert: fs.readFileSync('./cert/certificate.crt'),
+    },
+    app
+    )
+    .listen(PORT, hostname, function () {
+    console.log(
+        `Server listens https://${hostname}:${PORT}`
+    );
 });
