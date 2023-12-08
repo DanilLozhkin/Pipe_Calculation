@@ -3,9 +3,7 @@ const engine = new BABYLON.Engine(canvas, true);
 let scene;
 
 
-let W = 0.25;
 
-let pointStrings = `(${0} ${0} ${0.25}) //${0}\n`;;
 
 const createScene = function () {
 
@@ -22,7 +20,9 @@ const createScene = function () {
 
     Speed = parseFloat(form.elements.Speed.value);
 
-    let count = 0;
+    let count = 0; let W = 0.25;
+
+    let pointStrings = `(${0} ${0} ${0.25}) //${0}\n`;;
 
 
     // Создание сцены
@@ -277,11 +277,19 @@ const createScene = function () {
                 (15 13 12 14)
                 (13 10 11 12)
 
-                //(0 2 3 1)
-                //(2 4 5 3)
-                //(4 6 7 5)
-                //(6 8 9 7)
+                
             );
+        }
+        symmetryPlane
+        {
+            type wall;
+            faces
+            {
+                (0 2 3 1)
+                (2 4 5 3)
+                (4 6 7 5)
+                (6 8 9 7)
+            }
         }
         cylinder_1
         {
@@ -383,6 +391,10 @@ boundaryField
     {
         type            fixedValue;
         value           uniform (0 0 0);
+    }
+    symmetry
+    {
+        type             symmetryPlane;
     }
     cylinder_1
     {

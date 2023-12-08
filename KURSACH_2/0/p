@@ -33,6 +33,10 @@ boundaryField
     {
         type            zeroGradient;
     }
+    symmetry
+    {
+        type            zeroGradient;
+    }
     cylinder_1
     {
         type            zeroGradient;
