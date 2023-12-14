@@ -33,9 +33,9 @@ boundaryField
     {
         type            zeroGradient;
     }
-    symmetry
+    symmetry_1
     {
-        type            zeroGradient;
+        type            symmetry;
     }
     cylinder_1
     {

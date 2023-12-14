@@ -280,16 +280,16 @@ const createScene = function () {
                 
             );
         }
-        symmetryPlane
+        symmetry_1
         {
-            type wall;
+            type symmetry;
             faces
-            {
+            (
                 (0 2 3 1)
                 (2 4 5 3)
                 (4 6 7 5)
                 (6 8 9 7)
-            }
+            )
         }
         cylinder_1
         {
@@ -392,9 +392,9 @@ boundaryField
         type            fixedValue;
         value           uniform (0 0 0);
     }
-    symmetry
+    symmetry_1
     {
-        type             symmetryPlane;
+        type            symmetry
     }
     cylinder_1
     {

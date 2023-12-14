@@ -36,6 +36,10 @@ wall
 type            fixedValue;
 value           uniform (0 0 0);
 }
+symmetry_1
+{
+type            symmetry
+}
 cylinder_1
 {
 type            fixedValue;

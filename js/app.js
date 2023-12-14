@@ -25,8 +25,8 @@ app.use(morgan('dev'));
 app.use('/', router);
 
 
-const hostname = '192.168.1.64';
-const PORT = 8000;
+const hostname = '127.0.0.1';
+const PORT = 3000;
 
 
 https
