@@ -3,12 +3,20 @@ const express = require("express");
 const router = express.Router();
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const { exec } = require('child_process');
+//const { exec } = require('child_process');
+
+const {exec, spawn} = require('child_process');
+const { error } = require('console');
+let controller = new AbortController();
+let {signal} =controller;
+
+let cleaned = "";
+let spawnPROCESS = null;
 
 router.use(express.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
     const blockMeshDict = req.body.blockMeshDict;
     const U = req.body.U;
 
@@ -18,32 +26,71 @@ router.post('/add', (req, res) => {
 
     // Сохраняем файл blockMeshDict
     fs.writeFile(__dirname + "/../KURSACH_2/system/blockMeshDict", blockMeshDict, (err) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Ошибка при сохранении blockMeshDict:', err);
+            return res.status(500).json({ error: 'Ошибка при сохранении blockMeshDict' });
+        }
         console.log('Значение 1 успешно сохранено в файле');
     });
+    
 
     // Сохраняем файл U
     fs.writeFile(__dirname + "/../KURSACH_2/0/U", U, (err) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Ошибка при сохранении blockMeshDict:', err);
+            return res.status(500).json({ error: 'Ошибка при сохранении blockMeshDict' });
+        }
         console.log('Значение 2 успешно сохранено в файле');
     });
+   
+    //res.json({ message: 'Данные успешно обработаны' });
 
-    const pathToCleanScript = __dirname + "/../KURSACH_2/PROCESS.sh";
+    console.log(__dirname + "/../KURSACH_2/PROCESS.sh");
 
+    try{
+        await PROCESS();
+    
+    }catch{
+        res.send("Не удалось запустить расчёт")
+    }
 
-    //запуск исполнительного файла
-    exec(`sh ${ pathToCleanScript }`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(exec `error: ${ error }`);
-            return;
-        }
-        console.log(`stdout: ${ stdout }`);
-        console.error(`stderr: ${ stderr }`);
-    });
-
-    res.json({ message: 'Данные успешно обработаны' });
 
 });
+
+async function PROCESS() {
+    return new Promise((resolve, reject) => {
+        //spawnPROCESS = spawn("sh " + __dirname + "/../KURSACH_2/PROCESS.sh " + __dirname + "/../KURSACH_2/system/controlDict", [], {shell: true, signal});
+        spawnPROCESS = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/PROCESS.sh", [], {shell: true, signal});
+
+        spawnPROCESS.stdout.on("data", (data) => {
+            console.log(`stdout: ${data}`);
+        });
+
+        spawnPROCESS.stderr.on("data", (data) => {
+            console.log(`stderr: ${data}`);
+            // Handle the error, but don't send the response here
+            reject(new Error('Ошибка во время расчета'));
+        });
+
+        spawnPROCESS.on("error", (error) => {
+            cleaned = "Не удалось отчистить файл от предыдущего решения.";
+            console.error(`Ошибка в дочернем процессе: ${error.message}`);
+        });
+
+        spawnPROCESS.on("spawn", () => {
+            cleaned = "удалось отчистить файл от предыдущего решения.";
+            console.log(`cleaned`);
+        });
+        
+
+        spawnPROCESS.on("close", (code) => {
+            console.log(code);
+            // Resolve the promise, indicating that the process has completed
+            resolve();
+        });
+    });
+}
+
 
 
 router.get('/babylon.js.map', (req, res) => {
