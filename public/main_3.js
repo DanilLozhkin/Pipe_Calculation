@@ -276,21 +276,14 @@ const createScene = function () {
                 (17 15 14 16)
                 (15 13 12 14)
                 (13 10 11 12)
-
-                
-            );
-        }
-        symmetry_1
-        {
-            type symmetry;
-            faces
-            (
                 (0 2 3 1)
                 (2 4 5 3)
                 (4 6 7 5)
                 (6 8 9 7)
-            )
+                
+            );
         }
+   
         cylinder_1
         {
             type wall;
@@ -392,10 +385,7 @@ boundaryField
         type            fixedValue;
         value           uniform (0 0 0);
     }
-    symmetry_1
-    {
-        type            symmetry
-    }
+ 
     cylinder_1
     {
         type            fixedValue;

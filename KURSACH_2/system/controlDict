@@ -18,7 +18,7 @@ application     pimpleFoam;
 
 solver          incompressibleFluid;
 
-startFrom       latestTime;
+startFrom       latestTime; 
 
 startTime       0;
 

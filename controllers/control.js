@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 //const { exec } = require('child_process');
 
-const {exec, spawn} = require('child_process');
+const { exec, spawn } = require('child_process');
 const { error } = require('console');
 let controller = new AbortController();
-let {signal} =controller;
+let { signal } = controller;
 
-let cleaned = "";
 let spawnPROCESS = null;
+let ls = null;
 
 router.use(express.json())
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +32,7 @@ router.post('/add', async (req, res) => {
         }
         console.log('Значение 1 успешно сохранено в файле');
     });
-    
+
 
     // Сохраняем файл U
     fs.writeFile(__dirname + "/../KURSACH_2/0/U", U, (err) => {
@@ -42,16 +42,16 @@ router.post('/add', async (req, res) => {
         }
         console.log('Значение 2 успешно сохранено в файле');
     });
-   
+
     //res.json({ message: 'Данные успешно обработаны' });
 
-    console.log(__dirname + "/../KURSACH_2/PROCESS.sh");
 
-    try{
-        await PROCESS();
-    
-    }catch{
-        res.send("Не удалось запустить расчёт")
+    try {
+        //await PROCESS();
+        await StartParaView();
+        res.send('успешно');
+    } catch {
+        res.send("Не успешно")
     }
 
 
@@ -60,7 +60,7 @@ router.post('/add', async (req, res) => {
 async function PROCESS() {
     return new Promise((resolve, reject) => {
         //spawnPROCESS = spawn("sh " + __dirname + "/../KURSACH_2/PROCESS.sh " + __dirname + "/../KURSACH_2/system/controlDict", [], {shell: true, signal});
-        spawnPROCESS = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/PROCESS.sh", [], {shell: true, signal});
+        spawnPROCESS = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/PROCESS.sh", [], { shell: true, signal });
 
         spawnPROCESS.stdout.on("data", (data) => {
             console.log(`stdout: ${data}`);
@@ -68,8 +68,8 @@ async function PROCESS() {
 
         spawnPROCESS.stderr.on("data", (data) => {
             console.log(`stderr: ${data}`);
-            // Handle the error, but don't send the response here
-            reject(new Error('Ошибка во время расчета'));
+            
+            console.error('Ошибка во время расчета');
         });
 
         spawnPROCESS.on("error", (error) => {
@@ -78,20 +78,49 @@ async function PROCESS() {
         });
 
         spawnPROCESS.on("spawn", () => {
-            cleaned = "удалось отчистить файл от предыдущего решения.";
+            cleaned = "удалось отчистить файл от предыдущего решения и создать новое.";
             console.log(`cleaned`);
         });
-        
+
 
         spawnPROCESS.on("close", (code) => {
             console.log(code);
-            // Resolve the promise, indicating that the process has completed
             resolve();
         });
     });
 }
 
+async function StartParaView() {
+    return new Promise((resolve, reject) => {
+    ls = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/; paraFoam;", [], {shell:true, signal });
+   
 
+    ls.stdout.on("data", (data) => {
+        console.log(`stdout: ${data}`);
+        //document.getElementById("inputField").value = "Y";
+    });
+
+    ls.stderr.on("data", (data) => {
+        console.log(`stderr: ${data}`);
+     
+    });
+
+    ls.on("error", (error) => {
+        console.error(`Ошибка в дочернем процессе: ${error.message}`);
+    });
+
+    ls.on("spawn", () => {
+        console.log(`cleaned`);
+    });
+
+
+    ls.on("close", (code) => {
+        console.log(code);
+        
+        resolve();
+    });
+    });
+}
 
 router.get('/babylon.js.map', (req, res) => {
     try {
