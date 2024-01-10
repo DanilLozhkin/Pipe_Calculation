@@ -51,20 +51,20 @@ const createScene = function () {
         new BABYLON.Vector3(l1 + l2, 0, W),
         new BABYLON.Vector3(l1 + l2, 0, -W),
 
-        new BABYLON.Vector3(l1 + l2, D2 / 2, W),
-        new BABYLON.Vector3(l1 + l2, D2 / 2, -W),
-        new BABYLON.Vector3(l1, D2 / 2, -W),
-        new BABYLON.Vector3(l1, D2 / 2, W),
+        new BABYLON.Vector3(l1 + l2, D2, W),
+        new BABYLON.Vector3(l1 + l2, D2, -W),
+        new BABYLON.Vector3(l1, D2, -W),
+        new BABYLON.Vector3(l1, D2, W),
 
-        new BABYLON.Vector3((l_22) + l_22 / 2, ((((l_22) + l_22 / 2) * ((D2 - D1) / 2) / l1) + D1 / 2), -W),
-        new BABYLON.Vector3((l_22) + l_22 / 2, ((((l_22) + l_22 / 2) * ((D2 - D1) / 2) / l1) + D1 / 2), W),
+        new BABYLON.Vector3((l_22) + l_22 / 2, ((((l_22) + l_22 / 2) * ((D2 - D1)) / l1) + D1), -W),
+        new BABYLON.Vector3((l_22) + l_22 / 2, ((((l_22) + l_22 / 2) * ((D2 - D1)) / l1) + D1), W),
 
-        new BABYLON.Vector3((((l_22-l_21) / 2)+l_21), (((((l_22-l_21) / 2)+l_21) * ((D2 - D1) / 2) / l1) + D1 / 2), -W),
-        new BABYLON.Vector3((((l_22-l_21) / 2)+l_21), (((((l_22-l_21) / 2)+l_21) * ((D2 - D1) / 2) / l1) + D1 / 2), W),
+        new BABYLON.Vector3((((l_22-l_21) / 2)+l_21), (((((l_22-l_21) / 2)+l_21) * ((D2 - D1)) / l1) + D1), -W),
+        new BABYLON.Vector3((((l_22-l_21) / 2)+l_21), (((((l_22-l_21) / 2)+l_21) * ((D2 - D1)) / l1) + D1), W),
 
 
-        new BABYLON.Vector3(0, D1 / 2, -W),
-        new BABYLON.Vector3(0, D1 / 2, W),
+        new BABYLON.Vector3(0, D1, -W),
+        new BABYLON.Vector3(0, D1, W),
 
 
 

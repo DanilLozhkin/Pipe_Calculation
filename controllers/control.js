@@ -47,8 +47,8 @@ router.post('/add', async (req, res) => {
 
 
     try {
-        //await PROCESS();
-        await StartParaView();
+        await PROCESS();
+        //await StartParaView();
         res.send('успешно');
     } catch {
         res.send("Не успешно")
@@ -59,8 +59,9 @@ router.post('/add', async (req, res) => {
 
 async function PROCESS() {
     return new Promise((resolve, reject) => {
-        //spawnPROCESS = spawn("sh " + __dirname + "/../KURSACH_2/PROCESS.sh " + __dirname + "/../KURSACH_2/system/controlDict", [], {shell: true, signal});
-        spawnPROCESS = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/PROCESS.sh", [], { shell: true, signal });
+        const scriptPath = path.join(__dirname, '..', 'KURSACH_2', 'PROCESS.sh');
+        spawnPROCESS = spawn("sh " + scriptPath, [], {shell: true, signal});
+        //spawnPROCESS = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/PROCESS.sh", [], { shell: true, signal });
 
         spawnPROCESS.stdout.on("data", (data) => {
             console.log(`stdout: ${data}`);
@@ -90,37 +91,37 @@ async function PROCESS() {
     });
 }
 
-async function StartParaView() {
-    return new Promise((resolve, reject) => {
-    ls = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/; paraFoam;", [], {shell:true, signal });
+// async function StartParaView() {
+//     return new Promise((resolve, reject) => {
+//     ls = spawn("sh /home/admin1/универ/гидро-термо-динамика/курсач/репозиторий/KURSACH_2/; cd  $(pwd)/KURSACH_2; paraFoam;", [], {shell:true});
    
 
-    ls.stdout.on("data", (data) => {
-        console.log(`stdout: ${data}`);
-        //document.getElementById("inputField").value = "Y";
-    });
+//     ls.stdout.on("data", (data) => {
+//         console.log(`stdout: ${data}`);
+//         //document.getElementById("inputField").value = "Y";
+//     });
 
-    ls.stderr.on("data", (data) => {
-        console.log(`stderr: ${data}`);
+//     ls.stderr.on("data", (data) => {
+//         console.log(`stderr: ${data}`);
      
-    });
+//     });
 
-    ls.on("error", (error) => {
-        console.error(`Ошибка в дочернем процессе: ${error.message}`);
-    });
+//     ls.on("error", (error) => {
+//         console.error(`Ошибка в дочернем процессе: ${error.message}`);
+//     });
 
-    ls.on("spawn", () => {
-        console.log(`cleaned`);
-    });
+//     ls.on("spawn", () => {
+//         console.log(`cleaned`);
+//     });
 
 
-    ls.on("close", (code) => {
-        console.log(code);
+//     ls.on("close", (code) => {
+//         console.log(code);
         
-        resolve();
-    });
-    });
-}
+//         resolve();
+//     });
+//     });
+// }
 
 router.get('/babylon.js.map', (req, res) => {
     try {
